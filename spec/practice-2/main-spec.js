@@ -10,11 +10,17 @@ describe("Person", () => {
     expect(person.age).toBe(21);
   });
 
+  it("should distinguish person by id", () => {
+    let person1 = new Person("Tom", 21);
+    let person2 = new Person("Tom", 21);
+    expect(person1).not.toBe(person2);
+    expect(person1.id).not.toBe(person2.id);
+  });
+
   it("should have a method introduce, introduce person with name and age", () => {
     let person = new Person("Tom", 21);
     let introduce = person.introduce();
     expect(introduce).toBe("My name is Tom. I am 21 years old.");
-
   });
 
   describe("Student", () => {
@@ -30,10 +36,10 @@ describe("Person", () => {
     it("should overwrite Person introduce, introduce student with class", () => {
       let klass = new Class(2);
       let student = new Student("Tom", 21, klass);
+
       let introduce = student.introduce();
 
       expect(introduce).toBe("My name is Tom. I am 21 years old. I am a Student. I am at Class 2.");
-
     });
 
     it("should introduce student is a leader, when class assign this student to be a leader",
@@ -41,10 +47,10 @@ describe("Person", () => {
       let klass = new Class(2);
       let student = new Student("Tom", 21, klass);
       klass.assignLeader(student);
+
       let introduce = student.introduce();
 
       expect(introduce).toBe("My name is Tom. I am 21 years old. I am a Student. I am Leader of Class 2.");
-
     });
 
   });
@@ -69,7 +75,6 @@ describe("Person", () => {
       let introduce = teacher.introduce();
 
       expect(introduce).toBe("My name is Joun. I am 21 years old. I am a Teacher. I teach Class 2,3.");
-
     });
 
     it("should show no class this teacher teach, when there is no class assgined to this teacher",
