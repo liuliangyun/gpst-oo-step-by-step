@@ -22,22 +22,21 @@ describe("Person", () => {
 
 describe("Student", () => {
   it("should have field name, age and class", () => {
-    let clazz = new Class(2);
-    let student = new Student("Tom", 21, clazz);
+    let klass = new Class(2);
+    let student = new Student("Tom", 21, klass);
     expect(student.name).toBe("Tom");
     expect(student.age).toBe(21);
-    expect(student.clazz).toBe(clazz);
-
+    expect(student.klass).toBe(klass);
   });
 
   it("should overwrite Person introduce, introduce student with class", () => {
     let clazz = new Class(2);
     let student = new Student("Tom", 21, clazz);
     clazz.appendMember(student);
+
     let introduce = student.introduce();
 
     expect(introduce).toBe("My name is Tom. I am 21 years old. I am a Student. I am at Class 2.");
-
   });
 
   it("should introduce there is not class assigned to this student, when this studen d" +
@@ -49,7 +48,6 @@ describe("Student", () => {
 
     expect(introduce).toBe("My name is Tom. I am 21 years old. I am a Student. I haven't been allowed to joi" +
         "n Class.");
-
   });
 
   it("should introduce student is a leader, when class assign this student to be a lea" +
@@ -69,13 +67,13 @@ describe("Student", () => {
 
 describe("Teacher", () => {
 
-  it("should have field name, age and klass", () => {
-    let clazz1 = new Class(2);
-    let clazz2 = new Class(3);
-    let teacher = new Teacher("Joun", 21, [clazz1, clazz2]);
+  it("should have field name, age and classes", () => {
+    let class1 = new Class(2);
+    let class2 = new Class(3);
+    let teacher = new Teacher("Joun", 21, [class1, class2]);
     expect(teacher.name).toBe("Joun");
     expect(teacher.age).toBe(21);
-    expect(teacher.clazzes).toEqual([clazz1, clazz2]);
+    expect(teacher.classes).toEqual([class1, class2]);
   });
 
   it("should overwrite Person introduce and show all classes this teacher teaches, whe" +
@@ -150,15 +148,17 @@ describe("Class", () => {
     expect(result).toBe("It is not one of us.");
   });
 
-  it("should call teacher's addended member event, when a student is appended to teach" +
+  it("should call teacher's appended member event, when a student is appended to teach" +
       "er's own classes",
   () => {
-    let clazz = new Class(2);
-    let student = new Student("Jerry", 21, clazz);
-    let teacher = new Teacher("Tom", 21, [clazz]);
-    spyOn(teacher, 'notifyStudentAppended');
-    clazz.appendMember(student);
+    let klass = new Class(2);
+    let student = new Student("Jerry", 21, klass);
+    let teacher = new Teacher("Tom", 21, [klass]);
+    spyOn(teacher, 'notifyStudentAppended').and.callThrough();
+    spyOn(console, 'log');
+    klass.appendMember(student);
     expect(teacher.notifyStudentAppended).toHaveBeenCalledWith("Jerry has joined Class 2");
+    expect(console.log).toHaveBeenCalledWith("I am Tom. Jerry has joined Class 2.");
   });
 
   it("should call teacher's assign class leader event, when a student is assigned to b" +
@@ -167,11 +167,13 @@ describe("Class", () => {
     let clazz = new Class(2);
     let student = new Student("Jerry", 21, clazz);
     let teacher = new Teacher("Tom", 21, [clazz]);
-    spyOn(teacher, 'notifyLeaderAssigned');
+    spyOn(teacher, 'notifyLeaderAssigned').and.callThrough();
     spyOn(teacher, 'notifyStudentAppended');
+    spyOn(console, 'log');
     clazz.appendMember(student);
     clazz.assignLeader(student);
-    expect(teacher.notifyLeaderAssigned).toHaveBeenCalledWith("Jerry become Leader of Class 2")
+    expect(teacher.notifyLeaderAssigned).toHaveBeenCalledWith("Jerry become Leader of Class 2");
+    expect(console.log).toHaveBeenCalledWith("I am Tom. Jerry become Leader of Class 2.")
   });
 
 });
