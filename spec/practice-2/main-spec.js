@@ -3,7 +3,7 @@ const Student = require('../../main/practice-2/student');
 const Teacher = require('../../main/practice-2/teacher');
 const Class = require('../../main/practice-2/class');
 
-describe("Person", () => {
+describe("practice2 Person", () => {
   it("should have field name and age", () => {
     let person = new Person("Tom", 21);
     expect(person.name).toBe("Tom");
@@ -17,7 +17,7 @@ describe("Person", () => {
 
   });
 
-  describe("Student", () => {
+  describe("practice2 Student", () => {
     it("should have field name, age and class", () => {
       let klass = new Class(2);
       let student = new Student("Tom", 21, klass);
@@ -49,7 +49,7 @@ describe("Person", () => {
 
   });
 
-  describe("Teacher", () => {
+  describe("practice2 Teacher", () => {
 
     it("should have field name, age and classes", () => {
       let klass1 = new Class(2);

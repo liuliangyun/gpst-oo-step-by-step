@@ -3,7 +3,7 @@ const Student = require('../../main/practice-3/student');
 const Teacher = require('../../main/practice-3/teacher');
 const Class = require('../../main/practice-3/class');
 
-describe("Person", () => {
+describe("practice3 Person", () => {
   it("should have field name and age", () => {
     let person = new Person("Tom", 21);
     expect(person.name).toBe("Tom");
@@ -20,7 +20,7 @@ describe("Person", () => {
   });
 });
 
-describe("Student", () => {
+describe("practice3 Student", () => {
   it("should have field name, age and class", () => {
     let clazz = new Class(2);
     let student = new Student("Tom", 21, clazz);
@@ -67,7 +67,7 @@ describe("Student", () => {
 
 });
 
-describe("Teacher", () => {
+describe("practice3 Teacher", () => {
 
   it("should have field name, age and klass", () => {
     let clazz1 = new Class(2);
@@ -133,7 +133,7 @@ describe("Teacher", () => {
 
 });
 
-describe("Class", () => {
+describe("practice3 Class", () => {
 
   it("should Assign team leader successfully, when student is appended to class", () => {
     let clazz = new Class(2);
